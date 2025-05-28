@@ -7,11 +7,13 @@ export default function Home() {
 
     useEffect(() => {
         (async function getData() {
-            const res = await fetch('https://dummyjson.com/users', {
+            // const res = await fetch('https://dummyjson.com/users', {
+            const res = await fetch('/api/getdata', {
                 cache: 'no-store',
             });
             const data = await res.json();
-            setUsers(data.users);
+            setUsers(data);
+            // setUsers(data.users);
         })();
     }, [])
 
@@ -22,8 +24,8 @@ export default function Home() {
             <h1 className="text-2xl font-bold mb-4">CSR Users List</h1>
             <ul className="space-y-2">
                 {users.map(post => (
-                    <li key={post.id} className="pl-3 rounded shadow">
-                        {post.firstName + ' ' + post.lastName}
+                    <li key={post._id} className="pl-3 rounded shadow">
+                        {post.username + ', ' + post.email}
                     </li>
                 ))}
             </ul>
